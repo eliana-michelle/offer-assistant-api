@@ -1,21 +1,22 @@
 const moment = require('moment');
+exports = {}
 
-export const formatMultiValueOptions = (options) => {
-    options.map(option => option.value);
-    if(options.includes('*')){
-        options.shift()
+exports.formatMultiValueOptions = (options) => {
+    const values = options.map(option => option.value);
+    if(values.includes('*')){
+        values.shift()
     }
-    if(options.length === 0){
+    if(values.length === 0){
         return null
     }
-    return options
+    return values
 };
 
-export const checkForUndefined = (value) => value === undefined;
+exports.checkForUndefined = (value) => value === undefined;
 
-export const formatFormDate = (value) => moment(value).endOf('day').format().replace('T', ' ').split('+')[0];
+exports.formatFormDate = (value) => moment(value).endOf('day').format().replace('T', ' ').split('+')[0];
 
-export const getDateSqlStatement = (dateField, toDate, fromDate) => {
+exports.getDateSqlStatement = (dateField, toDate, fromDate) => {
     if(toDate && fromDate){
         return ` (${dateField} BETWEEN '${fromDate}' AND '${toDate}') AND`
     } else if (fromDate) {
@@ -24,3 +25,5 @@ export const getDateSqlStatement = (dateField, toDate, fromDate) => {
         return sqlStatement+=` (${dateField} <= '${toDate}') AND`
     }
 }
+
+module.exports = exports;

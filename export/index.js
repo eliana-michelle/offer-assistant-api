@@ -5,7 +5,7 @@ const { formatMultiValueOptions, checkForUndefined, formatFormDate, getDateSqlSt
 
 
 module.exports = async function (context, req) {
-    const values = req.body.values;    
+    const values = req.body.values;
     const offices = values.office ? formatMultiValueOptions(values.office): null;
     const offerCodes = values.offerCode ? formatMultiValueOptions(values.offerCodes) : null;
     const cancelStatus = values.cancelStatus ? formatMultiValueOptions(values.cancelStatus) : null;
@@ -22,7 +22,6 @@ module.exports = async function (context, req) {
         sqlStatement=``
         if(Object.keys(values).length === 0){
             sqlStatement+='SELECT * FROM sessions'
-
         } else {
             sqlStatement+='SELECT * FROM sessions WHERE '
 
@@ -51,13 +50,13 @@ module.exports = async function (context, req) {
                 sqlStatement+=' AND'
             }
             if(letterSentFrom || letterSentTo) {
-                sqlStatement+= getDateSqlStatement(letter_sent, letterSentTo, letterSentFrom)
+                sqlStatement+= getDateSqlStatement('letter_sent', letterSentTo, letterSentFrom)
             }
             if(expirationFrom || expirationTo){
-                sqlStatement+= getDateSqlStatement(expiration_date, expirationTo, expirationFrom)
+                sqlStatement+= getDateSqlStatement('expiration_date', expirationTo, expirationFrom)
             }
             if(updatedFrom || updatedTo){
-                sqlStatement+= getDateSqlStatement(updated_at, updatedTo, updatedFrom)
+                sqlStatement+= getDateSqlStatement('updated_at', updatedTo, updatedFrom)
             }
 
             const checkForDanglingAnd = sqlStatement.substr(sqlStatement.length - 3);
