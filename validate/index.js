@@ -9,8 +9,8 @@ module.exports = async function (context, req) {
         const azurePool = await AZURE_POOL;
         
         const validate = await azurePool.request().query(`SELECT * FROM sessions WHERE invoice = '${invoice}'`);
-        const comments = await azurePool.request().query(`SELECT * FROM comments WHERE invoice = ${invoice}`);
-        const history = await azurePool.request().query(`SELECT * FROM audit_history WHERE invoice = ${invoice}`);
+        const comments = await azurePool.request().query(`SELECT * FROM comments WHERE invoice = '${invoice}'`);
+        const history = await azurePool.request().query(`SELECT * FROM audit_history WHERE invoice = '${invoice}'`);
         const session = validate.recordset[0]
 
         if(validate.recordset.length > 0){
