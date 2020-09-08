@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
     try {
         const azurePool = await AZURE_POOL
         const updatedSession = await azurePool.request().query(`EXEC updateCancelStatus_upsert @invoice='${session}', @cancel_status='${status}', @username='${user}', @comment='${comment}'`)
-        const updatedHistory = await azurePool.request().query(`SELECT * FROM audit_history WHERE invoice = ${session}`)
+        const updatedHistory = await azurePool.request().query(`SELECT * FROM audit_history WHERE invoice = '${session}'`)
 
         context.res = {
             status: 200, 
