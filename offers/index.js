@@ -6,16 +6,15 @@ const { headers }  = require('../util/headers')
 module.exports = async function (context, req) {
 
     try {
-        let azurePool = await AZURE_POOL
-        let offerCodes = await azurePool.request().query(`SELECT DISTINCT offer_code FROM sessions`)
-        offerCodes = offerCodes.recordset
+        const azurePool = await AZURE_POOL
+        const offerCodes = await azurePool.request().query(`SELECT DISTINCT offer_code FROM sessions`)
   
         context.res = {
             status: 200, 
             headers: headers, 
             body: {
                 status: true, 
-                offerCodes: offerCodes
+                offerCodes: offerCodes.recordset
             }
         }
     } catch (error){

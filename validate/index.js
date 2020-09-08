@@ -3,7 +3,7 @@ const { AZURE_POOL } = require('../util/poolConfig')
 const { headers }  = require('../util/headers')
 
 module.exports = async function (context, req) {
-    const invoice = context.req.params.invoice;
+    const invoice = context.req.params.sessionId;
 
     try {
         const azurePool = await AZURE_POOL;

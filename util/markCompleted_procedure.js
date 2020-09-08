@@ -4,7 +4,7 @@ AS
     SET
     completed = 1,
     completed_at = CURRENT_TIMESTAMP
-    WHERE invoice = @invoice AND charge_back = 1;
+    WHERE invoice = @invoice;
 
     INSERT INTO audit_history (invoice, username, comment, updated_at)
       VALUES ( @invoice, @username, @comment, CURRENT_TIMESTAMP);
